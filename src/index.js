@@ -16,12 +16,11 @@ const rootEl = document.getElementById('root');
 function render() {
   ReactDOM.render(
     <Provider store = { store }>
-      <ScrollToTop/>
       <BrowserRouter>
+        <ScrollToTop/>
         <App/>
       </BrowserRouter>
-    </Provider>
-    ,
+    </Provider>,
     rootEl
   );
 }
