@@ -23,11 +23,10 @@ export default function NavBar({ setFormOpen }) {
                     Re-vents
                 </Menu.Item>
                 <Menu.Item as = { NavLink } to = '/events' name = 'Events'/>
-                { authenticated &&
+                <Menu.Item as = { NavLink } to = '/sandbox' name = 'Sandbox'/>
                     <Menu.Item as = { NavLink } to = '/createEvent'>
                         <Button positive inverted content = 'Create Event'/>
                     </Menu.Item>
-                }
                 { authenticated ? 
                     <SignedInMenu signOut = { handleSignOut }/> :
                     <SignedOutMenu setAuthenticated = { setAuthenticated }/>
