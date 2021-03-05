@@ -1,8 +1,6 @@
 import React from 'react';
 import { Container, Segment, Header, Image, Button, Icon } from 'semantic-ui-react';
-
 export default function HomePage({ history }) {
-
     return (
         <Segment inverted textAlign = 'center' vertical className = 'masthead'>
             <Container>

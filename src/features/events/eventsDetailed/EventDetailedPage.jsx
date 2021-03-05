@@ -5,9 +5,7 @@ import EventDetailedHeader from './EventDetailedHeader';
 import EventDetailedInfo from './EventDetailedInfo';
 import EventDetailedSidebar from './EventDetailedSidebar';
 import { useSelector } from 'react-redux'; 
-
 export default function EventDetailedPage({ match }) {
-
     const event = useSelector(state => state.event.events.find(e => e.id === match.params.id));
 
     return (

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Segment, Item } from 'semantic-ui-react';
-
 export default function EventDetailedSidebar({ attendees }) {
-
     return(
         <>
             <Segment textAlign = "center" style = { { border: 'none' } } attached = "top" secondary inverted color = "teal">
