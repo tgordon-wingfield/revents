@@ -7,6 +7,7 @@ import EventDetailedPage from '../../features/events/eventsDetailed/EventDetaile
 import HomePage from '../../features/home/HomePage';
 import NavBar from '../../features/nav/NavBar';
 import Sandbox from '../../features/sandbox/Sandbox';
+import ErrorComponent from '../common/errors/ErrorComponents';
 import ModalManager from '../common/modals/ModalManager';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route exact path = '/sandbox' component = { Sandbox }/>
             <Route path = '/events/:id' component = { EventDetailedPage }/>
             <Route path = { ['/createEvent', '/manage/:id'] } component = { EventForm } key = { key }/>
+            <Route path = '/error' component = { ErrorComponent }/>
           </Container>
         </>
       ) }/>

@@ -6,6 +6,7 @@ export default function EventDetailedSidebar({ attendees }) {
             <Segment textAlign = "center" style = { { border: 'none' } } attached = "top" secondary inverted color = "teal">
                 { attendees.length }
                 { attendees.length > 1 ? 'People' : 'Person' }
+                
                 Going
             </Segment>
             <Segment attached>

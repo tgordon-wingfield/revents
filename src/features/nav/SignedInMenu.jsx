@@ -17,6 +17,7 @@ export default function SignedInMenu() {
                     <Dropdown.Item text = 'My Profile' icon = 'user'/>
                     <Dropdown.Item onClick = { () => {
                         dispatch(signOutUser());
+                        
                         history.push('/');
                     } } text = 'Sign Out' icon = 'power'/>
                 </Dropdown.Menu>

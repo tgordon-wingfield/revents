@@ -13,6 +13,7 @@ export default function Sandbox() {
         <>
             <h1>Testing 123</h1>
             <h3>The data is: { data }</h3>
+            
             <Button name = 'increment' loading = { loading && target === 'increment' } onClick = { (e) => {
                 dispatch(increment(20));
                 setTarget(e.target.name)

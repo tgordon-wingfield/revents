@@ -6,8 +6,10 @@ export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 export function increment(amount) {
     return async function(dispatch) {
         dispatch(asyncActionStart());
+
         try {
             await delay(1000);
+
             dispatch({
                 type: INCREMENT_COUNTER,
                 payload: amount
@@ -21,8 +23,10 @@ export function increment(amount) {
 export function decrement(amount) {
     return async function(dispatch) {
         dispatch(asyncActionStart());
+
         try {
             await delay(1000);
+
             dispatch({
                 type: DECREMENT_COUNTER,
                 payload: amount
@@ -30,6 +34,7 @@ export function decrement(amount) {
             dispatch(asyncActionFinish());
         } catch (error) {
             dispatch(asyncActionError(error));
+            
             toast.error(error);
         }
     }

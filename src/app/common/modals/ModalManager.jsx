@@ -10,6 +10,7 @@ export default function ModalManager() {
     if(currentModal) {
         const { modalType, modalProps } = currentModal;
         const ModalComponent = modalLookup[modalType];
+        
         renderedModal = <ModalComponent {...modalProps}/>;
     }
     return <span>{ renderedModal }</span>;

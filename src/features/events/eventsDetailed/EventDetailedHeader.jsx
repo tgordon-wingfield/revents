@@ -25,6 +25,7 @@ export default function EventDetailedHeader({ event }) {
                         <Item>
                             <Item.Content>
                                 <Header size = "huge" content = { event.title } style = { { color: 'white' } }/>
+                                
                                 <p>{ format(event.date, 'MMMM d, yyyyh:mm a') }</p>
                                 <p>
                                     Hosted by
