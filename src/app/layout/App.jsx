@@ -8,6 +8,7 @@ import EventForm from '../../features/events/eventForm/EventForm';
 import EventDetailedPage from '../../features/events/eventsDetailed/EventDetailedPage';
 import HomePage from '../../features/home/HomePage';
 import NavBar from '../../features/nav/NavBar';
+import ProfilePage from '../../features/profiles/profilePage/ProfilePage';
 import Sandbox from '../../features/sandbox/Sandbox';
 import ErrorComponent from '../common/errors/ErrorComponents';
 import ModalManager from '../common/modals/ModalManager';
@@ -33,6 +34,7 @@ function App() {
             <Route path = { ['/createEvent', '/manage/:id'] } component = { EventForm } key = { key }/>
             <Route path = '/error' component = { ErrorComponent }/>
             <Route path = '/account' component = { AccountPage }/>
+            <Route path = '/profile/:id' component = { ProfilePage }/>
           </Container>
         </>
       ) }/>
