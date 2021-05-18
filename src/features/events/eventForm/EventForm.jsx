@@ -1,7 +1,7 @@
 import { Segment, Header, Button, Confirm } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { listenToSelectedEvent } from '../eventActions';
+import { clearSelectedEvent, listenToSelectedEvent } from '../eventActions';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import MyTextInput from '../../../app/common/form/MyTextInput';
@@ -13,13 +13,20 @@ import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { addEventToFirestore, cancelEventToggle, listenToEventFromFirestore, updateEventInFirestore } from '../../../app/firestore/firestoreService';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { toast } from 'react-toastify';
-import { useState } from 'react';
-export default function EventForm({ match, history }) {
+import { useEffect, useState } from 'react';
+export default function EventForm({ match, history, location }) {
     const dispatch = useDispatch();
     const [loadingCancel, setLoadingCancel] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);
     const { selectedEvent } = useSelector((state) => state.event);
     const { loading, error } = useSelector((state) => state.async);
+
+    useEffect(() => {
+        if(location.pathname !== '/createEvent') return;
+
+        dispatch(clearSelectedEvent());
+    }, [dispatch, location.pathname])
+
     const initialValues = selectedEvent ?? {
         title: '',
         category: '',
@@ -49,9 +56,11 @@ export default function EventForm({ match, history }) {
     }
 
     useFirestoreDoc({
-        shouldExecute: !!match.params.id,
+        shouldExecute: match.params.id !== selectedEvent?.id && location.pathname !== '/createEvent',
+
         query: () => listenToEventFromFirestore(match.params.id),
         data: event => dispatch(listenToSelectedEvent(event)),
+
         deps: [match.params.id, dispatch],
     })
     
@@ -59,7 +68,7 @@ export default function EventForm({ match, history }) {
     if (error) return <Redirect to = '/error'/>
     return(
         <Segment clearing>
-            <Formik initialValues = { initialValues } validationSchema = { validationSchema } onSubmit = { async (values, { setSubmitting }) => {
+            <Formik enableReinitialize initialValues = { initialValues } validationSchema = { validationSchema } onSubmit = { async (values, { setSubmitting }) => {
                     try {
                         selectedEvent ? await updateEventInFirestore(values) : await addEventToFirestore(values);
                         setSubmitting(false);
@@ -78,7 +87,7 @@ export default function EventForm({ match, history }) {
                         <Header sub color = 'teal' content = 'Event Location Details'/>
                         <MyTextInput name = 'city' placeholder = 'City'/>
                         <MyTextInput name = 'venue' placeholder = 'Venue'/>
-                        <MyDateInput name = 'date' placeholder = 'Event Date' timeFormat = 'HH:mm' showTimeSelect timeCaption = 'time' dateFormat = 'MMMM d, yyyy h:mm a'/>
+                        <MyDateInput name = 'date' placeholder = 'Event Date' timeFormat = 'HH:mm' showTimeSelect timeCaption = 'time' dateFormat = 'MMMM d, yyyy h:mm a' autoComplete = 'off'/>
                         <Button loading = { isSubmitting } disabled = {!isValid || !dirty || isSubmitting } type = 'submit' floated = 'right' positive content = 'Submit'/>
 
                         { selectedEvent && 
